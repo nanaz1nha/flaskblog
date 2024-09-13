@@ -105,3 +105,29 @@ ou
 
  - Tecle <kbd>Ctrl</kbd> + <kbd>C</kbd> para interromper o servidor sem fechar o terminal.
 
+## Clonando este repositório
+
+> Usando o [GitHub Desktop](https://github.com/apps/desktop)
+
+1. Acesse  a [raiz do repositório](https://github.com/Luferat/flaskblog).
+2. Clique no botão `[<> Code ▾]` então, em **Open with GitHub Desktop**
+3. Na caixa de alerta, clique em `[Abrir GitHubDesktop.exe]`
+4. Abre-se a janela **Clone repository** do **GitHub Desktop**
+5. Se necessário, edite o campo **Local path** para apontar para o local onde o repositório será clonado
+6. Abra o repositório local no **Visual Studio Code**
+7. Abra um terminal teclando <kbd>Ctrl</kbd> + <kbd>'</kbd> e, se necessário troque o terminal para um "Prompt de Comandos"
+8. Crie e ative o **Ambiente Virtual** comandando:
+```
+python -m venv .venv
+.venv\Scripts\activate
+```
+9. Instale todas as dependências, comandando:
+```
+pip install -r requeriments.txt
+```
+10. Inicie o servidor Web, embutido no Flask, com o comando:
+```
+python index.py
+```
+
+
