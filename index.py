@@ -1,5 +1,5 @@
 # Importa a classe Flask do módulo flask
-from flask import Flask  
+from flask import Flask, render_template  
 
 # Cria uma instância da aplicação Flask
 app = Flask(__name__)  
@@ -7,12 +7,13 @@ app = Flask(__name__)
 # Define a rota para a URL raiz ('/')
 @app.route('/')
 def home():
-    # Retorna uma mensagem simples
-    return "Hello World!"  
+      
+# Abre a página de template → layout.html
+    return render_template('layout.html')
 
 # Define a rota para a URL '/contatos'
 @app.route('/contacts')
-def peteca():
+def contacts():
     # Retorna uma mensagem simples
     return "Diga o que você quer agora!"  
 
