@@ -170,13 +170,11 @@ button {
 }
 
 /* Article */
-
 #wrap>main>article {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Aside */
-
 #wrap>main>aside {
     background-color: #ddd;
     border-top: 4px dotted rgb(128, 128, 128);
@@ -219,8 +217,9 @@ button {
     font-size: 70%;
 }
 
-/* Stick footer */
-
+/* Stick footer ← Exemplo de técnica                  */
+/* "Empurra" o rodapé para o final da viewport quando */
+/* a página tem pouco conteúdo.                       */
 #wrap {
     display: flex;
     flex-direction: column;
@@ -240,7 +239,6 @@ button {
 @media screen and (min-width: 480px) {
 
     /* Menu principal */
-
     #wrap>nav {
         justify-content: flex-end;
     }
