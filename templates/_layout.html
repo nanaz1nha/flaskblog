@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/_layout.css">
+    {% if page.css %}
+    <link rel="stylesheet" href="/static/css/{{ page.css }}">
+    {% endif %}
+    {% if page.title == '' %}
+    <title>{{ page.site.name }}</title>
+    {% else %}
+    <title>{{ page.site.name }} - {{ page.title }}</title>
+    {% endif %}
+    <link rel="shortcut icon" href="{{ page.site.favicon }}" type="image/x-icon">
+</head>
+
+<body>
+
+    <div id="wrap">
+
+        <header>
+            <div>
+                <a href="/">{{ page.site.logo | safe }}</a>
+                <h1>{{ page.site.name }}</h1>
+            </div>
+            <form action="search.html" method="get">
+                <input type="search" name="q" placeholder="Procurar">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass fa-fw"></i></button>
+            </form>
+        </header>
+
+        <nav>
+            <a href="/">
+                <i class="fa-solid fa-house fa-fw"></i>
+                <span>Início</span>
+            </a>
+            <a href="/contacts">
+                <i class="fa-solid fa-comments fa-fw"></i>
+                <span>Contatos</span>
+            </a>
+            <a href="/about">
+                <i class="fa-solid fa-circle-info fa-fw"></i>
+                <span>Sobre</span>
+            </a>
+        </nav>
+
+        <main>
+
+            <article>
+                {% block article %}{% endblock %}
+            </article>
+
+            <aside>
+                {% block aside %}{% endblock %}
+            </aside>
+
+        </main>
+
+        <footer>
+            <a href="/">
+                <i class="fa-solid fa-house fa-fw"></i>
+            </a>
+            <div>
+                {{ page.site.license | safe }}                
+                <small>
+                    <a href="/contacts">Faça contato</a> &nbsp;|&nbsp;
+                    <a href="/policies">Políticas de privacidade</a>
+                </small>
+            </div>
+            <a href="#wrap">
+                <i class="fa-solid fa-circle-up fa-fw"></i>
+            </a>
+        </footer>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/static/js/_layout.js"></script>
+    {% if page.js %}
+    <link rel="stylesheet" href="/static/js/{{ page.js }}">
+    {% endif %}
+
+</body>
+
+</html>

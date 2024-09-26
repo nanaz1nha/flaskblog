@@ -33,12 +33,11 @@ body {
 
 /* Fundo das páginas */
 body {
-    background-color: rgb(227, 227, 227);
-    background-image: url('/static/img/bg01.jpg');
+    background-color: rgb(11, 56, 92);
+    background-image: url('/static/img/bg01.png');
     background-attachment: fixed;
-    background-position: left;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
 }
 
 /* Larguras mínima e máxima do conteúdo */
@@ -80,9 +79,9 @@ button {
 /*************/
 
 #wrap>header {
-    background-color: orange;
     display: flex;
     flex-direction: column;
+    background-color: rgba(255, 166, 0, 1);
 }
 
 #wrap>header div {
@@ -98,6 +97,14 @@ button {
 #wrap>header div i {
     color: white;
     -webkit-text-stroke: 2px black;
+    margin: .25rem .5rem;
+}
+
+/* Logotipo usando imagem */
+#wrap>header div img {
+    display: block;
+    height: 4rem;
+    width: auto;
     margin: .25rem .5rem;
 }
 
@@ -172,14 +179,14 @@ button {
 /* Article */
 
 #wrap>main>article {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Aside */
 
 #wrap>main>aside {
-    background-color: #ddd;
-    border-top: 4px dotted rgb(128, 128, 128);
+    border-top: 5px dotted black;
+    background-color: rgba(221, 221, 221, 0.9);
 }
 
 /**********/
@@ -199,8 +206,8 @@ button {
 }
 
 #wrap>footer>a {
-    font-size: 2rem;
-    padding: .25rem;
+    font-size: 1.5rem;
+    padding: .5rem;
 }
 
 #wrap>footer a:hover {
@@ -208,7 +215,7 @@ button {
 }
 
 #wrap>footer>div {
-    font-size: .9rem;
+    font-size: .85rem;
     text-align: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -217,6 +224,7 @@ button {
 #wrap>footer>div small {
     display: block;
     font-size: 70%;
+    padding-top: .5rem;
 }
 
 /* Stick footer */
@@ -274,6 +282,14 @@ button {
         flex-grow: 1;
     }
 
+    #wrap>header form {
+        display: flex;
+        padding: 1rem;
+        margin-top: 0;
+        min-width: 300px;
+        max-width: 300px;
+    }
+
 }
 
 /* 768px ou mais */
@@ -288,7 +304,7 @@ button {
     /* Aside */
     #wrap>main>aside {
         border-top: none;
-        border-left: 4px dotted rgb(128, 128, 128);
+        border-left: 5px dotted black;
         min-width: 220px;
         max-width: 220px;
     }
