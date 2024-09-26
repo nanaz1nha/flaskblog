@@ -1,6 +1,15 @@
 from flask import Flask, render_template
+from flask_mysqldb import MySQL, MySQLdb
+
 
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'flaskblogdb'
+
+mysql = MySQL(app)
 
 
 SITE = {
@@ -14,13 +23,70 @@ SITE = {
 
 @app.route('/')
 def home():
+
+    sql = '''
+        SELECT art_id, art_title, art_resume, art_thumbnail
+        FROM article 
+        WHERE art_status = 'on' 
+        ORDER BY art_date DESC;
+    '''
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute(sql)
+    articles = cur.fetchall()
+    cur.close()
+
+    # print(articles)
+
     toPage = {
         'title': '',
         'site': SITE,
         'css': 'home.css',
-        'js': 'home.js'
+        'js': 'home.js',
+        'articles': articles
     }
     return render_template('home.html', page=toPage)
+
+
+@app.route('/view/<artid>')
+def view(artid):
+
+    if not artid.isdigit():
+        return page_not_found(404)
+
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    sql = '''
+        SELECT *, 
+            DATE_FORMAT(art_date, '%%d/%%m/%%Y às %%H:%%i') AS art_datebr,
+            TIMESTAMPDIFF(
+                YEAR, 
+                sta_birth, 
+                CURDATE()) - (DATE_FORMAT(CURDATE(), '00-%%m-%%d') < DATE_FORMAT(sta_birth, '00-%%m-%%d')
+            ) AS sta_age
+        FROM article 
+        INNER JOIN staff ON art_author = sta_id
+        WHERE art_id = %s 
+	        AND art_status = 'on';
+    '''
+    cur.execute(sql, (artid,))
+    article = cur.fetchone()
+    
+    print(article)
+
+    if article is None:
+        return page_not_found(404)
+    
+    update_sql = "UPDATE article SET art_views = art_views + 1 WHERE art_id = %s"
+    cur.execute(update_sql, (artid,))
+    mysql.connection.commit()
+    cur.close()
+
+    toPage = {
+        'title': article['art_title'],
+        'site': SITE,
+        'css': 'view.css',
+        'article': article
+    }
+    return render_template('view.html', page=toPage)
 
 
 @app.route('/contacts')

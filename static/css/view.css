@@ -1,0 +1,16 @@
+.author-date {
+    font-size: small;
+    text-align: right;
+    justify-content: flex-end;
+    font-style: italic;
+    padding: .5rem;
+    background-color: #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 480px) {
+    .author-date {
+        flex-direction: row;
+    }
+}

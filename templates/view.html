@@ -1,0 +1,33 @@
+{% extends '_layout.html' %}
+
+{% block article %}
+
+<h2>{{ page.article.art_title }}</h2>
+<div class="author-date">
+    <span>Por {{ page.article.sta_name }}</span> <span>em {{ page.article.art_datebr }}.</span>
+</div>
+<div class="article-body">{{ page.article.art_content | safe }}</div>
+
+{% endblock %}
+
+{% block aside %}
+
+
+<div class="aside-author">
+    <img src="{{ page.article.sta_image }}" alt="{{ page.article.sta_name }}">
+    <h4>{{ page.article.sta_name }}</h4>
+
+    <ul>
+        <li>{{ page.article.sta_age }} anos</li>
+        <li>
+            {% if page.article.sta_type == 'admin' %} Administrador(a)
+            {% elif page.article.sta_type == 'author' %} Autor(a)
+            {% else %} Moderador(a)
+            {% endif %}
+        </li>
+    </ul>
+
+    <small>{{ page.article.sta_description }}</small>
+</div>
+
+{% endblock %}
