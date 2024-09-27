@@ -1,8 +1,7 @@
-{# Insere o template `layout.html` nesta página #}
+{# Insere (herda) o template `layout.html` nesta página #}
 {% extends "layout.html" %}
 
-{# Bloco dentro de <article></article> #}
-
+{# Bloco dentro de <article></article> de `layout.html` #}
 {% block article %}
 
 <!-- Conteudo fake de teste → REMOVA-ME!!!! -->
@@ -21,11 +20,7 @@
 
 {% endblock%}
 
-
-
-
-
-{# Bloco dentro de <aside></aside> #}
+{# Bloco dentro de <aside></aside> de `layout.html` #}
 {% block aside %}
 
 <!-- Conteudo fake de teste → REMOVA-ME!!!! -->
