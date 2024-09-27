@@ -10,6 +10,7 @@
 * {
     box-sizing: border-box;
     outline: none;
+    transition: .2s;
 }
 
 /* Elementos raiz */
@@ -305,8 +306,8 @@ button {
     #wrap>main>aside {
         border-top: none;
         border-left: 5px dotted black;
-        min-width: 220px;
-        max-width: 220px;
+        min-width: 250px;
+        max-width: 250px;
     }
 
 }

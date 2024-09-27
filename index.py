@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_mysqldb import MySQL, MySQLdb
 
-
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
@@ -10,7 +9,6 @@ app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'flaskblogdb'
 
 mysql = MySQL(app)
-
 
 SITE = {
     'name': 'FlaskBlog',
@@ -53,7 +51,6 @@ def view(artid):
     if not artid.isdigit():
         return page_not_found(404)
 
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     sql = '''
         SELECT *, 
             DATE_FORMAT(art_date, '%%d/%%m/%%Y às %%H:%%i') AS art_datebr,
@@ -67,25 +64,47 @@ def view(artid):
         WHERE art_id = %s 
 	        AND art_status = 'on';
     '''
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cur.execute(sql, (artid,))
     article = cur.fetchone()
-    
-    print(article)
+
+    # print('\n\n\n', article, '\n\n\n')
 
     if article is None:
         return page_not_found(404)
-    
+
     update_sql = "UPDATE article SET art_views = art_views + 1 WHERE art_id = %s"
     cur.execute(update_sql, (artid,))
     mysql.connection.commit()
-    cur.close()
+
+    article['sta_first'] = article['sta_name'].split()[0]
+
+    sql = '''
+        SELECT art_id, art_title, art_thumbnail 
+        FROM `article`
+        WHERE art_author = %s
+            AND art_status = 'on'
+            AND art_date <= NOW()
+            AND art_id != %s
+        ORDER BY RAND()
+        LIMIT 4;
+    '''
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute(sql, (article['art_author'], article['art_id'],))
+    articles = cur.fetchall()
+
+    # print('\n\n\n', articles, '\n\n\n')
 
     toPage = {
         'title': article['art_title'],
         'site': SITE,
         'css': 'view.css',
-        'article': article
+        'article': article,
+        'articles': articles
     }
+
+    cur.close()
+
     return render_template('view.html', page=toPage)
 
 
