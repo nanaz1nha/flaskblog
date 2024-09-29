@@ -2,7 +2,57 @@
 
 {% block article %}
 
+<h2>Faça Contato</h2>
 
+<div class="article-form">
+
+    <p>Preencha os campos abaixo para entrar em contato com a equipe <strong>PyBlog</strong>.</p>
+
+    {% if page.error %}
+    <div class="error">
+        <h4>Oooops!</h4>
+        <p>Ocorrerma erros que impedem o envio do contato:</p>
+        <ul>
+            {% for e in page.error %}
+            <li>{{ e }}</li>
+            {% endfor %}
+        </ul>
+        <p>Por favor, verifique o formulário e tente enviar novamente.</p>
+    </div>
+    {% endif %}
+
+    <p class="center red">Todos os campos obrigatórios.</p>
+
+    <form action="/contacts" method="post">
+
+        <p>
+            <label for="fieldName">Seu nome:</label>
+            <input type="text" name="name" id="fieldName" minlength="3">
+        </p>
+
+        <p>
+            <label for="fieldEmail">Seu e-mail:</label>
+            <input type="email" name="email" id="fieldEmail">
+        </p>
+
+        <p>
+            <label for="fieldSubject">Assunto:</label>
+            <input type="text" name="subject" id="fieldSubject" minlength="5">
+        </p>
+
+        <p>
+            <label for="fieldMessage">Mensagem:</label>
+            <textarea name="message" id="fieldMessage" minlength="5"></textarea>
+        </p>
+
+        <p>
+            <button type="submit">Enviar</button>
+            <small>&larr; Clique somente uma vez</small>
+        </p>
+
+    </form>
+
+</div>
 
 {% endblock %}
 

@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_mysqldb import MySQL, MySQLdb
+import re
+from _functions import sanitize_string, sanitize_email
 
 app = Flask(__name__)
 
@@ -108,13 +110,64 @@ def view(artid):
     return render_template('view.html', page=toPage)
 
 
-@app.route('/contacts')
+@app.route('/contacts', methods=['GET', 'POST'])
 def contacts():
+
+    error = []
+    success = False
+    first_name = ''
+
+    if request.method == 'POST':
+        form_data = dict(request.form)
+
+        # print('\n\n\n', form_data, '\n\n\n')
+
+        name = sanitize_string(form_data['name'], True)
+        if len(name) < 3:
+            error.append('Seu nome parece inválido')
+
+        email = form_data['email']
+        email_regex = re.compile(
+            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@a-zA-Z0-9?(?:\.a-zA-Z0-9?)*$")
+
+        if not email_regex.match(email):
+            error.append('Seu e-mail parece inválido')
+
+        subject = sanitize_string(form_data['subject'], True)
+        if len(subject) < 5:
+            error.append('Seu assunto parece inválido')
+
+        message = sanitize_string(form_data['subject'], False)
+        if len(message) < 5:
+            error.append('Sua mensagem parece inválida')
+
+        print('\n\n\n', name, email, subject, message, '\n\n\n')
+
+        if error == []:
+            sql = '''
+                INSERT INTO contact (
+                    name, email, subject, message
+                ) VALUES (
+                    %s, %s, %s, %s
+                )
+            '''
+            cur = mysql.connection.cursor()
+            cur.execute(sql, (name, email, subject, message))
+            mysql.connection.commit()
+            cur.close()
+
+            first_name = name.split()[0]
+            success = True
+
     toPage = {
         'title': 'Faça contato',
         'site': SITE,
         'css': 'contacts.css',
-        'js': 'contacts.js'
+        'js': 'contacts.js',
+        'success': success,
+        'error': error,
+        'first_name': first_name,
+        'formdata': {'name': name, 'email': email, 'subject': subject, 'message': message}
     }
     return render_template('contacts.html', page=toPage)
 
