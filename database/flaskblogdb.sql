@@ -317,7 +317,7 @@ INSERT INTO article (
 ), (
     FROM_UNIXTIME( UNIX_TIMESTAMP('2024-01-01 00:00:00') + FLOOR(RAND() * (UNIX_TIMESTAMP('2024-10-31 23:59:59') - UNIX_TIMESTAMP('2024-01-01 00:00:00'))) ),
 	-- 'sta_id' de um staff existente --
-	'5',
+	'4',
     'Pedras que rolam na TI',
     -- Deixe os mesmos valores para todos os outros artigos
     'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
@@ -337,7 +337,7 @@ INSERT INTO article (
 ) ,(
     FROM_UNIXTIME( UNIX_TIMESTAMP('2024-01-01 00:00:00') + FLOOR(RAND() * (UNIX_TIMESTAMP('2024-10-31 23:59:59') - UNIX_TIMESTAMP('2024-01-01 00:00:00'))) ),
 	-- 'sta_id' de um staff existente --
-	'3',
+	'5',
     'Construção de funções desfuncionais',
     -- Deixe os mesmos valores para todos os outros artigos
     'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
@@ -374,38 +374,4 @@ INSERT INTO article (
 </ul>
 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis a mollitia doloribus repudiandae incidunt ullam debitis, minima iure quia, recusandae odio magnam velit quos ad nam eaque. Ut, dolorem eveniet?</p>    
     '
-);
-
--- Tabela "comment" --
-INSERT INTO comment (
-	-- Insira um "art_id" existente --
-	com_article,
-    com_author_name,
-    com_author_email,
-    com_comment
-) VALUES (
-	'10',
-    'Marlinelson',
-    'marli@nelson.com',
-    'É só mais um lorem ipsum.'
-), (
-	'10',
-    'Edicleuza',
-    'edi@cleuza.com',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-), (
-	'2',
-    'Soiana',
-    'soraia@email.com',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-),(
-	'1',
-    'Edicleuson',
-    'edic@email.com',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-),(
-	'10',
-    'Normalinda',
-    'normalinda@email.com',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
 );
