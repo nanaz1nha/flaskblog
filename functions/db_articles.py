@@ -3,7 +3,7 @@ from flask_mysqldb import MySQLdb
 
 def get_all(mysql):
 
-    sql = """
+    sql = '''
         -- Recebe a lista de artigos do banco de dados:
         --  A) Somente os campos necessários
         --  B) Somente artigos online
@@ -19,7 +19,7 @@ def get_all(mysql):
             AND art_date <= NOW()
         -- D --
         ORDER BY art_date DESC;
-    """
+    '''
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cur.execute(sql)
     articles = cur.fetchall()
