@@ -1,2 +1,2 @@
 /* JavaScript de `home.html` */
-console.log('Home também funciona!')
+// console.log('Home também funciona!')

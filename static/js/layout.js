@@ -1,2 +1,2 @@
 /* JavaScript do template */
-console.log('Template funciona!!!!')
+// console.log('Template funciona!!!!')
