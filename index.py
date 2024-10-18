@@ -35,6 +35,12 @@ def home():  # Função executada quando '/' é acessado
     # Debug: mostra o resultado no console
     # print('\n\n\n',articles, '\n\n\n')
 
+    # Obtém artigos mais visualizados
+    article_viewed = most_viewed(mysql)
+
+    # Obtém artigos mais comentados
+    articles_commented = most_commented(mysql)
+
     # Variável da página HTML
     toPage = {
         # Valor da tag <title> → Título da página
@@ -44,7 +50,11 @@ def home():  # Função executada quando '/' é acessado
         # Nome do JavaScript desta página (opcional)
         # 'js': 'home.js',
         # Outros pares "chave" : "valor" entram aqui
-        'articles': articles
+        'articles': articles,
+        # Artigos mais visualizados
+        'article_viewed': article_viewed,
+        # Artigos mais comentados
+        'articles_commented': articles_commented
     }
 
     # Abre a página de template → layout.html
